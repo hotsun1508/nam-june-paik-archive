@@ -38,7 +38,7 @@ const CopyButton: React.FC<{ textToCopy: string }> = ({ textToCopy }) => {
 
 // Helper function to convert array of objects to CSV
 const convertToCSV = (data: AnalysisResult[]): string => {
-  const header = ['Folder Name', 'File Name', 'Text'];
+  const header = ['Folder Name', 'File Name', 'Title', 'Text'];
   // Escape quotes within the text by doubling them up and wrap everything in quotes
   const escapeCSV = (str: string) => `"${str.replace(/"/g, '""')}"`;
 
@@ -46,6 +46,7 @@ const convertToCSV = (data: AnalysisResult[]): string => {
     [
       escapeCSV(row.folderName),
       escapeCSV(row.fileName),
+      escapeCSV(row.title),
       escapeCSV(row.text)
     ].join(',')
   );
@@ -115,6 +116,9 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({ results, isLoading }
                   File Name
                 </th>
                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
+                  Title
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                   Extracted Text
                 </th>
               </tr>
@@ -124,6 +128,7 @@ export const ResultsTable: React.FC<ResultsTableProps> = ({ results, isLoading }
                 <tr key={index} className="hover:bg-gray-700/50 transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-400 align-top">{result.folderName}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400 align-top">{result.fileName}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-300 align-top">{result.title}</td>
                   <td className="px-6 py-4 text-sm text-gray-300 align-top">
                      <div className="flex justify-between items-start gap-4">
                         <pre className="whitespace-pre-wrap font-sans break-words flex-grow">{result.text}</pre>

@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from 'react';
 import { Header } from './components/Header';
 import { FileUpload } from './components/FileUpload';
@@ -40,11 +39,12 @@ const App: React.FC = () => {
     const analysisPromises = files.map(async (file) => {
       try {
         const imagePart = await fileToGenerativePart(file);
-        const extractedText = await analyzeImageForText(imagePart);
+        const { title, text } = await analyzeImageForText(imagePart);
         return {
           folderName: 'Uploaded Articles',
           fileName: file.name,
-          text: extractedText,
+          title,
+          text,
         };
       } catch (e) {
         console.error(`Error analyzing ${file.name}:`, e);
@@ -52,6 +52,7 @@ const App: React.FC = () => {
         return {
           folderName: 'Uploaded Articles',
           fileName: file.name,
+          title: 'Error',
           text: `Error: ${errorMessage}`,
         };
       }
