@@ -1,0 +1,5 @@
+{
+  "name": "Nam June Paik Article Extractor",
+  "description": "An AI-powered tool to find and extract articles about the artist Nam June Paik from newspaper images. Upload images of newspaper pages, and the app will use Gemini to identify, isolate, and transcribe relevant text.",
+  "requestFramePermissions": []
+}
